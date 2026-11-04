@@ -1,0 +1,54 @@
+PROJECT_ROOT = $PROJECT_ROOT   (the folder holding SkinCancer/)
+SPLIT_ROOT   = $PROJECT_ROOT/splits_paper_seed42
+DATA_ROOT    = $HAM_DATA_ROOT
+OUTPUT_ROOT  = $PROJECT_ROOT/outputs
+HAM_GPU      = 0
+folds        = [0, 1, 2]
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_train.csv
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_val.csv
+  ok       $HAM_DATA_ROOT/HAM10000_metadata.csv
+  ok       $PROJECT_ROOT/outputs
+  ok       $PROJECT_ROOT/outputs/residual/cv_folds.csv
+  nothing will be written under: $PROJECT_ROOT, $PROJECT_ROOT/outputs, $PROJECT_ROOT/splits_paper_seed42, $HAM_DATA_ROOT, $HAM_MASK_DIR
+  temporary files elsewhere are left to the libraries
+
+device = cuda
+
+[Debug][DataPath]
+  DATA_ROOT=$HAM_DATA_ROOT
+  METADATA_CSV=$HAM_DATA_ROOT/HAM10000_metadata.csv
+  SPLIT_ROOT=$PROJECT_ROOT/splits_paper_seed42
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_1
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_1]=5000
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_2
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_2]=5015
+[Data] Found 10015 images across 2 directories.
+
+S15  magnification at inference, margins [0.0, 0.2, 0.4, 0.6, 0.8, 1.2]
+TALLY s15 base fold=0 n=1599 wrong_mixed=215 wrong_single=216 flips=-1
+TALLY s15 mask_m0 fold=0 n=1599 wrong_mixed=198 wrong_single=198 flips=-1
+TALLY s15 mask_m20 fold=0 n=1599 wrong_mixed=194 wrong_single=194 flips=-1
+TALLY s15 mask_m40 fold=0 n=1599 wrong_mixed=201 wrong_single=202 flips=-1
+TALLY s15 mask_m60 fold=0 n=1599 wrong_mixed=201 wrong_single=202 flips=-1
+TALLY s15 mask_m80 fold=0 n=1599 wrong_mixed=208 wrong_single=209 flips=-1
+TALLY s15 mask_m120 fold=0 n=1599 wrong_mixed=208 wrong_single=209 flips=-1
+  fold 0 done, n=1599
+TALLY s15 base fold=1 n=1598 wrong_mixed=228 wrong_single=229 flips=-1
+TALLY s15 mask_m0 fold=1 n=1598 wrong_mixed=232 wrong_single=232 flips=-1
+TALLY s15 mask_m20 fold=1 n=1598 wrong_mixed=228 wrong_single=228 flips=-1
+TALLY s15 mask_m40 fold=1 n=1598 wrong_mixed=223 wrong_single=223 flips=-1
+TALLY s15 mask_m60 fold=1 n=1598 wrong_mixed=220 wrong_single=220 flips=-1
+TALLY s15 mask_m80 fold=1 n=1598 wrong_mixed=224 wrong_single=224 flips=-1
+TALLY s15 mask_m120 fold=1 n=1598 wrong_mixed=221 wrong_single=221 flips=-1
+  fold 1 done, n=1598
+TALLY s15 base fold=2 n=1598 wrong_mixed=207 wrong_single=207 flips=-1
+TALLY s15 mask_m0 fold=2 n=1598 wrong_mixed=212 wrong_single=212 flips=-1
+TALLY s15 mask_m20 fold=2 n=1598 wrong_mixed=204 wrong_single=204 flips=-1
+TALLY s15 mask_m40 fold=2 n=1598 wrong_mixed=204 wrong_single=204 flips=-1
+TALLY s15 mask_m60 fold=2 n=1598 wrong_mixed=205 wrong_single=205 flips=-1
+TALLY s15 mask_m80 fold=2 n=1598 wrong_mixed=208 wrong_single=209 flips=-1
+TALLY s15 mask_m120 fold=2 n=1598 wrong_mixed=210 wrong_single=209 flips=-1
+  fold 2 done, n=1598
+
+Per-fold counts are on the TALLY lines above. Add the two GPUs' logs with
+  python fp32_probe.py --combine <log> <log>

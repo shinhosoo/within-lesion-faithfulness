@@ -1,0 +1,46 @@
+[bb_run] backbone=resnet50  output_root=$PROJECT_ROOT/outputs_resnet50
+PROJECT_ROOT = $PROJECT_ROOT   (the folder holding SkinCancer/)
+SPLIT_ROOT   = $PROJECT_ROOT/splits_paper_seed42
+DATA_ROOT    = $HAM_DATA_ROOT
+OUTPUT_ROOT  = $PROJECT_ROOT/outputs_resnet50
+HAM_GPU      = 0
+folds        = [0, 1, 2]
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_train.csv
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_val.csv
+  ok       $HAM_DATA_ROOT/HAM10000_metadata.csv
+  ok       $PROJECT_ROOT/outputs_resnet50
+  ok       $PROJECT_ROOT/outputs_resnet50/residual/cv_folds.csv
+  nothing will be written under: $PROJECT_ROOT, $PROJECT_ROOT/outputs_resnet50, $PROJECT_ROOT/splits_paper_seed42, $HAM_DATA_ROOT, $HAM_MASK_DIR
+  temporary files elsewhere are left to the libraries
+
+device = cuda
+
+[Debug][DataPath]
+  DATA_ROOT=$HAM_DATA_ROOT
+  METADATA_CSV=$HAM_DATA_ROOT/HAM10000_metadata.csv
+  SPLIT_ROOT=$PROJECT_ROOT/splits_paper_seed42
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_1
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_1]=5000
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_2
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_2]=5015
+[Data] Found 10015 images across 2 directories.
+
+S3  resnet50, root $PROJECT_ROOT/outputs_resnet50
+[Debug][Loader] label, shuffle=False: samples=1599, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1599, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 resnet50_seed42 fold=0 n=1599 wrong_mixed=325 wrong_single=326 flips=1
+CONF s3 resnet50_seed42 fold=0 which=mixed m=941,51,34,10,14,17,10,28,90,20,4,1,10,15,20,9,108,4,3,14,13,0,0,2,10,2,0,6,2,0,0,2,24,0,0,2,1,1,2,3,61,8,1,0,7,0,0,9,40
+CONF s3 resnet50_seed42 fold=0 which=single m=940,51,34,10,14,18,10,28,90,20,4,1,10,15,20,9,108,4,3,14,13,0,0,2,10,2,0,6,2,0,0,2,24,0,0,2,1,1,2,3,61,8,1,0,7,0,0,9,40
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 resnet50_seed42 fold=1 n=1598 wrong_mixed=298 wrong_single=298 flips=0
+CONF s3 resnet50_seed42 fold=1 which=mixed m=943,40,27,10,5,6,10,49,94,20,0,1,6,7,27,16,120,5,0,7,12,1,0,0,11,0,1,2,0,1,3,0,22,3,0,7,5,3,2,0,72,10,1,1,6,1,0,3,38
+CONF s3 resnet50_seed42 fold=1 which=single m=943,40,27,10,5,6,10,49,94,20,0,1,6,7,27,16,120,5,0,7,12,1,0,0,11,0,1,2,0,1,3,0,22,3,0,7,5,3,2,0,72,10,1,1,6,1,0,3,38
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 resnet50_seed42 fold=2 n=1598 wrong_mixed=325 wrong_single=326 flips=4
+CONF s3 resnet50_seed42 fold=2 which=mixed m=945,68,39,10,8,8,18,42,89,17,2,4,5,17,10,18,103,4,0,13,17,2,0,0,13,1,2,4,1,0,0,0,23,0,0,2,0,0,1,1,58,6,0,0,0,0,0,5,42
+CONF s3 resnet50_seed42 fold=2 which=single m=944,68,39,11,8,8,18,42,88,19,2,4,5,16,10,18,104,4,0,13,16,2,0,0,13,1,2,4,1,0,0,0,23,0,0,2,0,0,1,1,58,6,0,0,0,0,0,5,42
+
+Per-fold counts are on the TALLY lines above. Add the two GPUs' logs with
+  python fp32_probe.py --combine <log> <log>

@@ -1,0 +1,61 @@
+PROJECT_ROOT = $PROJECT_ROOT   (the folder holding SkinCancer/)
+SPLIT_ROOT   = $PROJECT_ROOT/splits_paper_seed42
+DATA_ROOT    = $HAM_DATA_ROOT
+OUTPUT_ROOT  = $PROJECT_ROOT/outputs
+HAM_GPU      = 0
+folds        = [0, 1, 2, 3, 4]
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_train.csv
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_val.csv
+  ok       $HAM_DATA_ROOT/HAM10000_metadata.csv
+  ok       $PROJECT_ROOT/outputs
+  ok       $PROJECT_ROOT/outputs/residual/cv_folds.csv
+  nothing will be written under: $PROJECT_ROOT, $PROJECT_ROOT/outputs, $PROJECT_ROOT/splits_paper_seed42, $HAM_DATA_ROOT, $HAM_MASK_DIR
+  temporary files elsewhere are left to the libraries
+
+device = cuda
+
+[Debug][DataPath]
+  DATA_ROOT=$HAM_DATA_ROOT
+  METADATA_CSV=$HAM_DATA_ROOT/HAM10000_metadata.csv
+  SPLIT_ROOT=$PROJECT_ROOT/splits_paper_seed42
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_1
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_1]=5000
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_2
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_2]=5015
+[Data] Found 10015 images across 2 directories.
+
+S2  single-stage mambaout_tiny.in1k on the test set, n=2024, 5 checkpoint(s)
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+  onestage_7class.pth done
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+  flat_s43.pth done
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+  flat_s44.pth done
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+  flat_s45.pth done
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] final_label, shuffle=False: samples=2024, batches=127, batch_size=16, num_workers=4, pin_memory=True
+  flat_s46.pth done
+  overall accuracy (mean over checkpoints) mixed=0.858004  single=0.858202  d=+0.000198  MOVES at 4 dp
+                                           sd: mixed=0.0114  single=0.0113
+                                           predictions that differ, summed over checkpoints: 7
+  S2 cells that move at the printed 3 decimals: 12 of 24
+    nv       Precision  mean 0.944 -> 0.943; sd 0.011 -> 0.010
+    nv       Recall     sd 0.025 -> 0.024
+    nv       F1-score   sd 0.009 -> 0.008
+    mel      Precision  mean 0.658 -> 0.659
+    mel      Recall     sd 0.069 -> 0.066
+    mel      F1-score   mean 0.679 -> 0.680; sd 0.030 -> 0.029
+    bkl      Precision  mean 0.740 -> 0.739; sd 0.051 -> 0.052
+    bkl      Recall     sd 0.025 -> 0.026
+    akiec    Precision  mean 0.673 -> 0.677; sd 0.032 -> 0.028
+    akiec    F1-score   mean 0.680 -> 0.682; sd 0.046 -> 0.043
+    Macro    Precision  mean 0.763 -> 0.764; sd 0.031 -> 0.030
+    Macro    F1-score   mean 0.738 -> 0.739; sd 0.023 -> 0.022
+
+Per-fold counts are on the TALLY lines above. Add the two GPUs' logs with
+  python fp32_probe.py --combine <log> <log>

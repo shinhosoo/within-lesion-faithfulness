@@ -1,0 +1,34 @@
+PROJECT_ROOT = $PROJECT_ROOT   (the folder holding SkinCancer/)
+SPLIT_ROOT   = $PROJECT_ROOT/splits_paper_seed42
+DATA_ROOT    = $HAM_DATA_ROOT
+OUTPUT_ROOT  = $PROJECT_ROOT/outputs
+HAM_GPU      = 1
+folds        = [3, 4]
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_train.csv
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_val.csv
+  ok       $HAM_DATA_ROOT/HAM10000_metadata.csv
+  ok       $PROJECT_ROOT/outputs
+  ok       $PROJECT_ROOT/outputs/residual/cv_folds.csv
+  nothing will be written under: $PROJECT_ROOT, $PROJECT_ROOT/outputs, $PROJECT_ROOT/splits_paper_seed42, $HAM_DATA_ROOT, $HAM_MASK_DIR
+  temporary files elsewhere are left to the libraries
+
+device = cuda
+
+[Debug][DataPath]
+  DATA_ROOT=$HAM_DATA_ROOT
+  METADATA_CSV=$HAM_DATA_ROOT/HAM10000_metadata.csv
+  SPLIT_ROOT=$PROJECT_ROOT/splits_paper_seed42
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_1
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_1]=5000
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_2
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_2]=5015
+[Data] Found 10015 images across 2 directories.
+
+S4  lesion-restricted training, the stored checkpoints re-evaluated
+TALLY s4 lcrop fold=3 n=1598 wrong_mixed=369 wrong_single=367 flips=2
+TALLY s4 lcrop fold=4 n=1598 wrong_mixed=263 wrong_single=264 flips=1
+TALLY s4 bgdim fold=3 n=1598 wrong_mixed=294 wrong_single=294 flips=0
+TALLY s4 bgdim fold=4 n=1598 wrong_mixed=255 wrong_single=255 flips=0
+
+Per-fold counts are on the TALLY lines above. Add the two GPUs' logs with
+  python fp32_probe.py --combine <log> <log>

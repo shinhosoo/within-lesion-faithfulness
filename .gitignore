@@ -1,0 +1,14 @@
+# the reader's own paths, created from code/env.sh.example
+code/env.sh
+
+# python
+__pycache__/
+*.py[cod]
+
+# outputs produced by the scripts
+code/outputs*/
+code/logs/
+code/figs/
+
+# macOS
+.DS_Store

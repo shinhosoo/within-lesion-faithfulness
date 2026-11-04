@@ -1,0 +1,9 @@
+{
+  "_note": "Hashes of the files in code/ as shipped, sha1 truncated to ten characters, which is the stamp improve/head_swap.py's source_id() writes into every archive it produces. None of these six files matches the stamp the shipped archives carry, and the edits behind that are of three kinds. Five were shipped with their comments shortened and their table numbers brought in line with the submitted manuscript. improve/head_swap.py had a further mechanism removed that no table reports, together with its entry in the head list and in build_head and the import those needed; the archives it produced carry the stamp 5668415cc6, which 31 rows of MANIFEST.md cite. Finally, every call to smart_reshape was removed from code/, along with the SkinCancer/models package that defined it. That helper normalised a stage-2 feature map to N,C,H,W, and both reported backbones already return N,C,H,W at that stage, so it returned its input unchanged on every call in every reported run; probe() still raises if a backbone gives anything other than four dimensions. A later pass corrected two statements in improve/head_swap.py that the code itself contradicts, namely that the supervised epoch is chosen on the validation macro AUC, when the default and the reported rows use the validation alignment loss, and reduced improve/localize_sup.py to the mask dataset the other modules import from it. None of these edits changes a measured value, and verify_heads.py dumps every archive root to the same numbers as before.",
+  "improve/ablate_macro.py": "64d7573d4f",
+  "improve/cond_head.py": "ecba582098",
+  "improve/deep_head.py": "b3c90f99e8",
+  "improve/head_swap.py": "331b4df9b7",
+  "improve/sup_frac_head.py": "149f90ff18",
+  "verify_heads.py": "ee399ca8a7"
+}

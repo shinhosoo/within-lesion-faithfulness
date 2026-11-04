@@ -1,0 +1,191 @@
+{
+ "folds": 5,
+ "images": 7991,
+ "precision": "single",
+ "derived_from": "the TALLY lines of archives/logs/fp32_probe/s15.gpu*.log",
+ "misclassified": 1116,
+ "accuracy": {
+  "base": 0.860343,
+  "mask_m0": 0.860593,
+  "mask_m20": 0.864097,
+  "mask_m40": 0.863096,
+  "mask_m60": 0.863847,
+  "mask_m80": 0.862721,
+  "mask_m120": 0.863221
+ },
+ "delta_pp": {
+  "mask_m0": 0.025,
+  "mask_m20": 0.3754,
+  "mask_m40": 0.2753,
+  "mask_m60": 0.3504,
+  "mask_m80": 0.2378,
+  "mask_m120": 0.2878
+ },
+ "fold_sd": {
+  "base": 0.00937,
+  "mask_m0": 0.010933,
+  "mask_m20": 0.011108,
+  "mask_m40": 0.010105,
+  "mask_m60": 0.011527,
+  "mask_m80": 0.008488,
+  "mask_m120": 0.007802
+ },
+ "wrong": {
+  "base": 1116,
+  "mask_m0": 1114,
+  "mask_m20": 1086,
+  "mask_m40": 1094,
+  "mask_m60": 1088,
+  "mask_m80": 1097,
+  "mask_m120": 1093
+ },
+ "wrong_per_fold": {
+  "base": [
+   216,
+   229,
+   207,
+   218,
+   246
+  ],
+  "mask_m0": [
+   198,
+   232,
+   212,
+   241,
+   231
+  ],
+  "mask_m20": [
+   194,
+   228,
+   204,
+   223,
+   237
+  ],
+  "mask_m40": [
+   202,
+   223,
+   204,
+   224,
+   241
+  ],
+  "mask_m60": [
+   202,
+   220,
+   205,
+   213,
+   248
+  ],
+  "mask_m80": [
+   209,
+   224,
+   209,
+   214,
+   241
+  ],
+  "mask_m120": [
+   209,
+   221,
+   209,
+   215,
+   239
+  ]
+ },
+ "largest_change_pp": 0.3754,
+ "mixed_precision": {
+  "accuracy": {
+   "base": 0.860843,
+   "mask_m0": 0.860343,
+   "mask_m20": 0.863972,
+   "mask_m40": 0.863346,
+   "mask_m60": 0.863972,
+   "mask_m80": 0.863096,
+   "mask_m120": 0.863221
+  },
+  "delta_pp": {
+   "mask_m0": -0.0501,
+   "mask_m20": 0.3129,
+   "mask_m40": 0.2503,
+   "mask_m60": 0.3129,
+   "mask_m80": 0.2253,
+   "mask_m120": 0.2378
+  },
+  "fold_sd": {
+   "base": 0.008912,
+   "mask_m0": 0.011094,
+   "mask_m20": 0.011163,
+   "mask_m40": 0.010059,
+   "mask_m60": 0.011663,
+   "mask_m80": 0.008792,
+   "mask_m120": 0.007816
+  },
+  "wrong": {
+   "base": 1112,
+   "mask_m0": 1116,
+   "mask_m20": 1087,
+   "mask_m40": 1092,
+   "mask_m60": 1087,
+   "mask_m80": 1094,
+   "mask_m120": 1093
+  },
+  "wrong_per_fold": {
+   "base": [
+    215,
+    228,
+    207,
+    218,
+    244
+   ],
+   "mask_m0": [
+    198,
+    232,
+    212,
+    241,
+    233
+   ],
+   "mask_m20": [
+    194,
+    228,
+    204,
+    224,
+    237
+   ],
+   "mask_m40": [
+    201,
+    223,
+    204,
+    224,
+    240
+   ],
+   "mask_m60": [
+    201,
+    220,
+    205,
+    213,
+    248
+   ],
+   "mask_m80": [
+    208,
+    224,
+    208,
+    213,
+    241
+   ],
+   "mask_m120": [
+    208,
+    221,
+    210,
+    215,
+    239
+   ]
+  },
+  "largest_change_pp": 0.3129,
+  "files": [
+   "zoom2_f0_s42.npz",
+   "zoom2_f1_s42.npz",
+   "zoom2_f2_s42.npz",
+   "zoom2_f3_s42.npz",
+   "zoom2_f4_s42.npz"
+  ],
+  "note": "the earlier run, which archives/outputs/zoom/ holds and collect_zoom.py prints"
+ }
+}

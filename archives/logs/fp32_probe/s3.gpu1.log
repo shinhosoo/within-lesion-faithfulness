@@ -1,0 +1,60 @@
+PROJECT_ROOT = $PROJECT_ROOT   (the folder holding SkinCancer/)
+SPLIT_ROOT   = $PROJECT_ROOT/splits_paper_seed42
+DATA_ROOT    = $HAM_DATA_ROOT
+OUTPUT_ROOT  = $PROJECT_ROOT/outputs
+HAM_GPU      = 1
+folds        = [3, 4]
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_train.csv
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_val.csv
+  ok       $HAM_DATA_ROOT/HAM10000_metadata.csv
+  ok       $PROJECT_ROOT/outputs
+  ok       $PROJECT_ROOT/outputs/residual/cv_folds.csv
+  nothing will be written under: $PROJECT_ROOT, $PROJECT_ROOT/outputs, $PROJECT_ROOT/splits_paper_seed42, $HAM_DATA_ROOT, $HAM_MASK_DIR
+  temporary files elsewhere are left to the libraries
+
+device = cuda
+
+[Debug][DataPath]
+  DATA_ROOT=$HAM_DATA_ROOT
+  METADATA_CSV=$HAM_DATA_ROOT/HAM10000_metadata.csv
+  SPLIT_ROOT=$PROJECT_ROOT/splits_paper_seed42
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_1
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_1]=5000
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_2
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_2]=5015
+[Data] Found 10015 images across 2 directories.
+
+S3  mambaout_tiny.in1k, root $PROJECT_ROOT/outputs
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 mambaout_tiny.in1k_seed42 fold=3 n=1598 wrong_mixed=218 wrong_single=218 flips=0
+CONF s3 mambaout_tiny.in1k_seed42 fold=3 which=mixed m=1014,41,16,1,0,6,1,43,123,10,0,0,0,0,23,13,128,3,0,3,8,6,0,0,11,0,0,0,1,2,0,0,12,1,0,3,2,6,0,0,56,5,5,4,11,0,0,4,36
+CONF s3 mambaout_tiny.in1k_seed42 fold=3 which=single m=1014,41,16,1,0,6,1,43,123,10,0,0,0,0,23,13,128,3,0,3,8,6,0,0,11,0,0,0,1,2,0,0,12,1,0,3,2,6,0,0,56,5,5,4,11,0,0,4,36
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 mambaout_tiny.in1k_seed42 fold=4 n=1598 wrong_mixed=244 wrong_single=246 flips=2
+CONF s3 mambaout_tiny.in1k_seed42 fold=4 which=mixed m=991,63,9,1,0,12,0,47,117,5,0,3,2,6,13,25,100,0,0,4,13,3,1,1,11,0,4,3,1,0,0,0,10,0,0,4,0,1,0,0,101,1,1,5,8,0,0,8,24
+CONF s3 mambaout_tiny.in1k_seed42 fold=4 which=single m=989,65,9,1,0,12,0,47,117,5,0,3,2,6,13,25,100,0,0,4,13,3,1,1,11,0,4,3,1,0,0,0,10,0,0,4,0,1,0,0,101,1,1,5,8,0,0,8,24
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 mambaout_tiny.in1k_seed43 fold=3 n=1598 wrong_mixed=254 wrong_single=255 flips=1
+CONF s3 mambaout_tiny.in1k_seed43 fold=3 which=mixed m=955,67,37,0,3,7,10,27,122,21,0,0,1,5,13,8,132,3,0,4,18,1,1,0,13,0,2,0,1,1,0,0,14,0,0,1,1,4,0,0,60,6,0,1,6,1,0,4,48
+CONF s3 mambaout_tiny.in1k_seed43 fold=3 which=single m=955,67,37,0,3,7,10,27,121,22,0,0,1,5,13,8,132,3,0,4,18,1,1,0,13,0,2,0,1,1,0,0,14,0,0,1,1,4,0,0,60,6,0,1,6,1,0,4,48
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 mambaout_tiny.in1k_seed43 fold=4 n=1598 wrong_mixed=238 wrong_single=239 flips=1
+CONF s3 mambaout_tiny.in1k_seed43 fold=4 which=mixed m=1014,43,12,3,0,4,0,58,96,15,2,3,2,4,11,15,119,0,0,3,7,4,1,1,12,0,2,3,0,0,0,0,11,0,0,14,3,7,0,0,82,1,1,5,11,1,0,2,26
+CONF s3 mambaout_tiny.in1k_seed43 fold=4 which=single m=1013,44,12,3,0,4,0,58,96,15,2,3,2,4,11,15,119,0,0,3,7,4,1,1,12,0,2,3,0,0,0,0,11,0,0,14,3,7,0,0,82,1,1,5,11,1,0,2,26
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 mambaout_tiny.in1k_seed44 fold=3 n=1598 wrong_mixed=236 wrong_single=236 flips=0
+CONF s3 mambaout_tiny.in1k_seed44 fold=3 which=mixed m=998,33,39,0,0,8,1,51,97,24,0,0,3,1,11,9,143,2,0,3,10,6,0,0,11,0,0,0,2,0,0,0,13,1,0,2,3,2,0,0,59,6,7,1,7,0,0,4,41
+CONF s3 mambaout_tiny.in1k_seed44 fold=3 which=single m=998,33,39,0,0,8,1,51,97,24,0,0,3,1,11,9,143,2,0,3,10,6,0,0,11,0,0,0,2,0,0,0,13,1,0,2,3,2,0,0,59,6,7,1,7,0,0,4,41
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 mambaout_tiny.in1k_seed44 fold=4 n=1598 wrong_mixed=234 wrong_single=234 flips=0
+CONF s3 mambaout_tiny.in1k_seed44 fold=4 which=mixed m=996,53,15,2,0,10,0,52,107,9,0,4,1,7,14,15,106,1,0,6,13,1,1,0,13,0,3,5,0,0,0,0,11,0,0,2,0,2,1,0,102,0,2,2,7,1,0,5,29
+CONF s3 mambaout_tiny.in1k_seed44 fold=4 which=single m=996,53,15,2,0,10,0,52,107,9,0,4,1,7,14,15,106,1,0,6,13,1,1,0,13,0,3,5,0,0,0,0,11,0,0,2,0,2,1,0,102,0,2,2,7,1,0,5,29
+
+Per-fold counts are on the TALLY lines above. Add the two GPUs' logs with
+  python fp32_probe.py --combine <log> <log>

@@ -1,0 +1,46 @@
+[bb_run] backbone=efficientnet_b3  output_root=$PROJECT_ROOT/outputs_efficientnet_b3
+PROJECT_ROOT = $PROJECT_ROOT   (the folder holding SkinCancer/)
+SPLIT_ROOT   = $PROJECT_ROOT/splits_paper_seed42
+DATA_ROOT    = $HAM_DATA_ROOT
+OUTPUT_ROOT  = $PROJECT_ROOT/outputs_efficientnet_b3
+HAM_GPU      = 0
+folds        = [0, 1, 2]
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_train.csv
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_val.csv
+  ok       $HAM_DATA_ROOT/HAM10000_metadata.csv
+  ok       $PROJECT_ROOT/outputs_efficientnet_b3
+  ok       $PROJECT_ROOT/outputs_efficientnet_b3/residual/cv_folds.csv
+  nothing will be written under: $PROJECT_ROOT, $PROJECT_ROOT/outputs_efficientnet_b3, $PROJECT_ROOT/splits_paper_seed42, $HAM_DATA_ROOT, $HAM_MASK_DIR
+  temporary files elsewhere are left to the libraries
+
+device = cuda
+
+[Debug][DataPath]
+  DATA_ROOT=$HAM_DATA_ROOT
+  METADATA_CSV=$HAM_DATA_ROOT/HAM10000_metadata.csv
+  SPLIT_ROOT=$PROJECT_ROOT/splits_paper_seed42
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_1
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_1]=5000
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_2
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_2]=5015
+[Data] Found 10015 images across 2 directories.
+
+S3  efficientnet_b3, root $PROJECT_ROOT/outputs_efficientnet_b3
+[Debug][Loader] label, shuffle=False: samples=1599, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1599, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 efficientnet_b3_seed42 fold=0 n=1599 wrong_mixed=266 wrong_single=266 flips=3
+CONF s3 efficientnet_b3_seed42 fold=0 which=mixed m=1010,39,11,2,3,7,5,40,100,17,1,1,5,4,35,24,100,1,0,4,7,2,2,1,10,1,1,3,2,0,2,0,24,0,0,6,3,6,0,2,56,5,5,3,9,0,0,7,33
+CONF s3 efficientnet_b3_seed42 fold=0 which=single m=1010,39,11,2,3,7,5,40,100,17,1,1,5,4,35,24,100,1,0,4,7,2,2,1,10,1,1,3,2,0,2,0,24,0,0,6,3,5,0,2,56,6,5,3,9,0,0,7,33
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 efficientnet_b3_seed42 fold=1 n=1598 wrong_mixed=334 wrong_single=332 flips=3
+CONF s3 efficientnet_b3_seed42 fold=1 which=mixed m=904,105,15,2,1,10,4,50,104,11,0,1,5,6,29,37,106,1,0,3,11,0,0,0,14,0,0,1,1,4,1,0,21,2,0,8,7,1,1,0,74,8,2,1,4,0,0,2,41
+CONF s3 efficientnet_b3_seed42 fold=1 which=single m=905,104,15,2,1,10,4,50,104,11,0,1,5,6,28,37,107,1,0,3,11,0,0,0,14,0,0,1,1,5,1,0,21,1,0,8,7,1,1,0,74,8,2,1,4,0,0,2,41
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 efficientnet_b3_seed42 fold=2 n=1598 wrong_mixed=295 wrong_single=295 flips=3
+CONF s3 efficientnet_b3_seed42 fold=2 which=mixed m=964,82,26,2,7,10,5,45,111,14,0,0,2,4,19,22,111,0,0,3,10,3,6,0,9,1,2,1,1,0,0,0,23,0,0,3,1,2,0,0,59,3,0,3,5,0,0,13,26
+CONF s3 efficientnet_b3_seed42 fold=2 which=single m=963,83,26,2,7,10,5,45,111,14,0,0,2,4,19,21,112,0,0,3,10,3,6,0,9,1,2,1,1,0,0,0,23,0,0,3,2,1,0,0,59,3,0,3,5,0,0,13,26
+
+Per-fold counts are on the TALLY lines above. Add the two GPUs' logs with
+  python fp32_probe.py --combine <log> <log>

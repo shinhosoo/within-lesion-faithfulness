@@ -1,0 +1,604 @@
+{
+ "S13": {
+  "definition": "H is the mean entropy of the normalised target in nats at the last epoch. gap = train_ce - H_gated.",
+  "mean": {
+   "H_gated": 5.3534,
+   "H_mask": 6.1676,
+   "gap": 1.26748,
+   "train_ce": 6.62088,
+   "val_ce": 6.66726
+  },
+  "per_fold": [
+   {
+    "H_gated": 5.094,
+    "H_mask": 6.164,
+    "fold": 0,
+    "gap": 1.5305,
+    "train_ce": 6.6245,
+    "val_ce": 6.6983
+   },
+   {
+    "H_gated": 5.167,
+    "H_mask": 6.165,
+    "fold": 1,
+    "gap": 1.5013,
+    "train_ce": 6.6683,
+    "val_ce": 6.6964
+   },
+   {
+    "H_gated": 5.413,
+    "H_mask": 6.181,
+    "fold": 2,
+    "gap": 1.1918,
+    "train_ce": 6.6048,
+    "val_ce": 6.6031
+   },
+   {
+    "H_gated": 5.522,
+    "H_mask": 6.164,
+    "fold": 3,
+    "gap": 1.077,
+    "train_ce": 6.599,
+    "val_ce": 6.6524
+   },
+   {
+    "H_gated": 5.571,
+    "H_mask": 6.164,
+    "fold": 4,
+    "gap": 1.0368,
+    "train_ce": 6.6078,
+    "val_ce": 6.6861
+   }
+  ],
+  "source": "logs/h2_grad_distil.log, produced by improve/grad_distil.py"
+ },
+ "S14": {
+  "excluded": "A further mechanism was measured in the same runs and is not reported, because it is not one of the mechanisms this paper defines. It has since been removed from the code, so improve/head_grad.py now defaults to exactly the five mechanisms this block lists.",
+  "lower_block": {
+   "basis": "all values over the 400 images per fold, nothing retrained",
+   "correlation_over_25_mechanism_by_fold_values": {
+    "max": 0.173,
+    "mean": 0.0756,
+    "min": 0.005,
+    "n": 25
+   },
+   "gradient_within_lesion_negative": "25/25 mechanism-by-fold values",
+   "rows": {
+    "cam": {
+     "attention": {
+      "ins_minus_del": {
+       "mean": 0.01682,
+       "per_fold": [
+        0.0071,
+        0.0203,
+        0.021,
+        -0.001,
+        0.0367
+       ],
+       "sd": 0.014464
+      },
+      "iou": {
+       "mean": 0.25012,
+       "per_fold": [
+        0.2266,
+        0.3004,
+        0.2103,
+        0.2458,
+        0.2675
+       ],
+       "sd": 0.035312
+      },
+      "within_lesion": {
+       "mean": -0.03988,
+       "per_fold": [
+        -0.0353,
+        -0.0613,
+        -0.0286,
+        -0.039,
+        -0.0352
+       ],
+       "sd": 0.012547
+      }
+     },
+     "attention_matches_stored_fold_value": "5/5 folds",
+     "corr_attention_gradient": {
+      "mean": 0.0558,
+      "per_fold": [
+       0.075,
+       0.055,
+       0.005,
+       0.078,
+       0.066
+      ]
+     },
+     "gradient": {
+      "ins_minus_del": {
+       "mean": -0.0084,
+       "per_fold": [
+        0.0117,
+        -0.0694,
+        0.0247,
+        0.0288,
+        -0.0378
+       ],
+       "sd": 0.043211
+      },
+      "iou": {
+       "mean": 0.25896,
+       "per_fold": [
+        0.2495,
+        0.2424,
+        0.2639,
+        0.3202,
+        0.2188
+       ],
+       "sd": 0.037919
+      },
+      "within_lesion": {
+       "mean": -0.03986,
+       "per_fold": [
+        -0.0317,
+        -0.0547,
+        -0.0544,
+        -0.0248,
+        -0.0337
+       ],
+       "sd": 0.013811
+      }
+     }
+    },
+    "centered_gaussian": {
+     "reference": {
+      "ins_minus_del": {
+       "mean": 0.17314,
+       "per_fold": [
+        0.2038,
+        0.1693,
+        0.1951,
+        0.1159,
+        0.1816
+       ],
+       "sd": 0.034587
+      },
+      "iou": {
+       "mean": 0.65898,
+       "per_fold": [
+        0.6524,
+        0.6554,
+        0.6608,
+        0.6614,
+        0.6649
+       ],
+       "sd": 0.005008
+      },
+      "within_lesion": {
+       "mean": 0.01236,
+       "per_fold": [
+        0.0165,
+        0.0207,
+        0.0084,
+        -0.0027,
+        0.0189
+       ],
+       "sd": 0.009643
+      }
+     }
+    },
+    "lowrank": {
+     "attention": {
+      "ins_minus_del": {
+       "mean": 0.02832,
+       "per_fold": [
+        0.02,
+        0.0324,
+        0.0258,
+        0.0519,
+        0.0115
+       ],
+       "sd": 0.015257
+      },
+      "iou": {
+       "mean": 0.26864,
+       "per_fold": [
+        0.258,
+        0.2726,
+        0.2676,
+        0.2771,
+        0.2679
+       ],
+       "sd": 0.007108
+      },
+      "within_lesion": {
+       "mean": 0.005,
+       "per_fold": [
+        0.0026,
+        0.0048,
+        0.0117,
+        0.0055,
+        0.0004
+       ],
+       "sd": 0.004246
+      }
+     },
+     "attention_matches_stored_fold_value": "5/5 folds against hs_lowrank_maprelu_f*.npz; the automatic check looks for hs_lowrank_f*.npz, which that root does not hold",
+     "corr_attention_gradient": {
+      "mean": 0.061,
+      "per_fold": [
+       0.12,
+       0.065,
+       0.015,
+       0.04,
+       0.065
+      ]
+     },
+     "gradient": {
+      "ins_minus_del": {
+       "mean": -0.00428,
+       "per_fold": [
+        -0.0097,
+        -0.0152,
+        -0.0158,
+        0.0148,
+        0.0045
+       ],
+       "sd": 0.013439
+      },
+      "iou": {
+       "mean": 0.25464,
+       "per_fold": [
+        0.2542,
+        0.2704,
+        0.2336,
+        0.2768,
+        0.2382
+       ],
+       "sd": 0.019056
+      },
+      "within_lesion": {
+       "mean": -0.04026,
+       "per_fold": [
+        -0.0522,
+        -0.0751,
+        -0.0335,
+        -0.0345,
+        -0.006
+       ],
+       "sd": 0.025539
+      }
+     }
+    },
+    "mlp": {
+     "attention": {
+      "ins_minus_del": {
+       "mean": -0.0072,
+       "per_fold": [
+        -0.096,
+        0.0523,
+        -0.0089,
+        -0.0007,
+        0.0173
+       ],
+       "sd": 0.054934
+      },
+      "iou": {
+       "mean": 0.27846,
+       "per_fold": [
+        0.2169,
+        0.2866,
+        0.3358,
+        0.3068,
+        0.2462
+       ],
+       "sd": 0.047402
+      },
+      "within_lesion": {
+       "mean": -0.12546,
+       "per_fold": [
+        -0.15,
+        -0.0491,
+        -0.214,
+        -0.1255,
+        -0.0887
+       ],
+       "sd": 0.062497
+      }
+     },
+     "attention_matches_stored_fold_value": "5/5 folds",
+     "corr_attention_gradient": {
+      "mean": 0.093,
+      "per_fold": [
+       0.043,
+       0.024,
+       0.084,
+       0.173,
+       0.141
+      ]
+     },
+     "gradient": {
+      "ins_minus_del": {
+       "mean": -0.01472,
+       "per_fold": [
+        0.0201,
+        -0.1123,
+        -0.0613,
+        0.0605,
+        0.0194
+       ],
+       "sd": 0.070225
+      },
+      "iou": {
+       "mean": 0.24692,
+       "per_fold": [
+        0.2492,
+        0.1929,
+        0.2124,
+        0.3143,
+        0.2658
+       ],
+       "sd": 0.047464
+      },
+      "within_lesion": {
+       "mean": -0.04164,
+       "per_fold": [
+        -0.0309,
+        -0.0967,
+        -0.047,
+        -0.0318,
+        -0.0018
+       ],
+       "sd": 0.034856
+      }
+     }
+    },
+    "mlp_sup0.2": {
+     "attention": {
+      "ins_minus_del": {
+       "mean": 0.15412,
+       "per_fold": [
+        0.1807,
+        0.1535,
+        0.1922,
+        0.084,
+        0.1602
+       ],
+       "sd": 0.042163
+      },
+      "iou": {
+       "mean": 0.81954,
+       "per_fold": [
+        0.8161,
+        0.8189,
+        0.8266,
+        0.8212,
+        0.8149
+       ],
+       "sd": 0.004647
+      },
+      "within_lesion": {
+       "mean": -0.01238,
+       "per_fold": [
+        -0.0167,
+        -0.0103,
+        -0.0388,
+        -0.038,
+        0.0419
+       ],
+       "sd": 0.032877
+      }
+     },
+     "attention_matches_stored_fold_value": "5/5 folds",
+     "corr_attention_gradient": {
+      "mean": 0.0794,
+      "per_fold": [
+       0.062,
+       0.118,
+       0.067,
+       0.091,
+       0.059
+      ]
+     },
+     "gradient": {
+      "ins_minus_del": {
+       "mean": -0.01178,
+       "per_fold": [
+        -0.0322,
+        0.0074,
+        -0.0024,
+        -0.0068,
+        -0.0249
+       ],
+       "sd": 0.016354
+      },
+      "iou": {
+       "mean": 0.23314,
+       "per_fold": [
+        0.2252,
+        0.2444,
+        0.23,
+        0.2437,
+        0.2224
+       ],
+       "sd": 0.010327
+      },
+      "within_lesion": {
+       "mean": -0.04898,
+       "per_fold": [
+        -0.069,
+        -0.039,
+        -0.0791,
+        -0.0424,
+        -0.0154
+       ],
+       "sd": 0.02539
+      }
+     }
+    },
+    "ssf": {
+     "attention": {
+      "ins_minus_del": {
+       "mean": 0.0048,
+       "per_fold": [
+        -0.0154,
+        0.0114,
+        -0.0146,
+        0.026,
+        0.0166
+       ],
+       "sd": 0.018819
+      },
+      "iou": {
+       "mean": 0.20674,
+       "per_fold": [
+        0.2021,
+        0.2138,
+        0.2044,
+        0.2188,
+        0.1946
+       ],
+       "sd": 0.009613
+      },
+      "within_lesion": {
+       "mean": -0.0708,
+       "per_fold": [
+        -0.0866,
+        -0.0734,
+        -0.1016,
+        -0.0617,
+        -0.0307
+       ],
+       "sd": 0.026907
+      }
+     },
+     "attention_matches_stored_fold_value": "5/5 folds",
+     "corr_attention_gradient": {
+      "mean": 0.0888,
+      "per_fold": [
+       0.125,
+       0.064,
+       0.077,
+       0.102,
+       0.076
+      ]
+     },
+     "gradient": {
+      "ins_minus_del": {
+       "mean": -0.0076,
+       "per_fold": [
+        0.0032,
+        -0.0718,
+        0.0216,
+        0.0376,
+        -0.0286
+       ],
+       "sd": 0.043517
+      },
+      "iou": {
+       "mean": 0.26104,
+       "per_fold": [
+        0.2747,
+        0.2729,
+        0.2455,
+        0.2839,
+        0.2282
+       ],
+       "sd": 0.023291
+      },
+      "within_lesion": {
+       "mean": -0.0413,
+       "per_fold": [
+        -0.0903,
+        -0.0517,
+        -0.0133,
+        -0.0217,
+        -0.0295
+       ],
+       "sd": 0.030889
+      }
+     }
+    }
+   },
+   "source": "logs/head_grad_rerun.log, produced by improve/head_grad.py over folds 0-4",
+   "supersedes": "logs/head_grad_all.log, which the shipped archives no longer reproduce. The class activation map, the position-wise MLP, the mask-supervised MLP and the centered Gaussian came out identical to three decimals in both runs. The scale-and-shift and rank-4 linear score rows did not, and the table now reports this run.",
+   "validity_check": "head_grad.py compares each attention row against the insertion-minus-deletion value already stored for that fold, building the file name as hs_<stem>_f<fold>.npz. Four of the five mechanisms agree on all five folds. For the rank-4 linear score that name does not exist in the archive root, which holds the run as hs_lowrank_maprelu_f<fold>.npz, so no automatic check ran and the log prints no tag for it. Compared against that file directly the re-run agrees on all five folds to within 5e-5 (+0.0200, +0.0324, +0.0258, +0.0519, +0.0115). Every lowrank archive in this package reports params_mechanism = 773, the rank-4 count, so the rank is not in question. The row's attention overlap of 0.269 is the rectified reading this block uses over its 400 images per fold, not Supplementary Table S10's softmax reading of 0.308."
+  },
+  "upper_block": {
+   "basis": "overlap over the whole held-out fold, faithfulness over 400 images per fold",
+   "rows": {
+    "gradient_gated_target": {
+     "ins_minus_del": [
+      0.145936,
+      0.044414
+     ],
+     "iou": [
+      0.792758,
+      0.007347
+     ],
+     "pointing": [
+      0.940308,
+      0.009378
+     ],
+     "within_lesion": [
+      -0.001303,
+      0.028104
+     ]
+    },
+    "occlusion_sensitivity_no_mask": {
+     "ins_minus_del": [
+      0.168383,
+      0.042882
+     ],
+     "iou": [
+      0.763573,
+      0.007837
+     ],
+     "pointing": [
+      0.949193,
+      0.011583
+     ],
+     "within_lesion": [
+      -0.017922,
+      0.025992
+     ]
+    },
+    "occlusion_sensitivity_with_mask": {
+     "ins_minus_del": [
+      0.157197,
+      0.042434
+     ],
+     "iou": [
+      0.816622,
+      0.001937
+     ],
+     "pointing": [
+      0.962458,
+      0.004621
+     ],
+     "within_lesion": [
+      -0.019759,
+      0.033872
+     ]
+    },
+    "uniform_mask_target_lambda0.2": {
+     "ins_minus_del": [
+      0.154135,
+      0.042151
+     ],
+     "iou": [
+      0.818278,
+      0.001248
+     ],
+     "pointing": [
+      0.958078,
+      0.005582
+     ],
+     "within_lesion": [
+      -0.01238,
+      0.032863
+     ]
+    }
+   },
+   "source": "archives/outputs/headswap and outputs/distil (distil.py)"
+  }
+ },
+ "_note": "Numbers behind Supplementary Tables S13 and S14. Extracted from the runs' own logs and from the shipped archives. The two side analyses of Section 3.4 are not otherwise recoverable from this repository, because grad_distil.py and distil.py recompute their targets rather than caching them."
+}

@@ -1,0 +1,41 @@
+[bb_run] backbone=vit_small_patch16_384  output_root=$PROJECT_ROOT/outputs_vit_small_patch16_384
+PROJECT_ROOT = $PROJECT_ROOT   (the folder holding SkinCancer/)
+SPLIT_ROOT   = $PROJECT_ROOT/splits_paper_seed42
+DATA_ROOT    = $HAM_DATA_ROOT
+OUTPUT_ROOT  = $PROJECT_ROOT/outputs_vit_small_patch16_384
+HAM_GPU      = 1
+folds        = [3, 4]
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_train.csv
+  ok       $PROJECT_ROOT/splits_paper_seed42/global_val.csv
+  ok       $HAM_DATA_ROOT/HAM10000_metadata.csv
+  ok       $PROJECT_ROOT/outputs_vit_small_patch16_384
+  ok       $PROJECT_ROOT/outputs_vit_small_patch16_384/residual/cv_folds.csv
+  nothing will be written under: $PROJECT_ROOT, $PROJECT_ROOT/outputs_vit_small_patch16_384, $PROJECT_ROOT/splits_paper_seed42, $HAM_DATA_ROOT, $HAM_MASK_DIR
+  temporary files elsewhere are left to the libraries
+
+device = cuda
+
+[Debug][DataPath]
+  DATA_ROOT=$HAM_DATA_ROOT
+  METADATA_CSV=$HAM_DATA_ROOT/HAM10000_metadata.csv
+  SPLIT_ROOT=$PROJECT_ROOT/splits_paper_seed42
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_1
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_1]=5000
+  image_dir=$HAM_DATA_ROOT/HAM10000_images_part_2
+  image_count[$HAM_DATA_ROOT/HAM10000_images_part_2]=5015
+[Data] Found 10015 images across 2 directories.
+
+S3  vit_small_patch16_384, root $PROJECT_ROOT/outputs_vit_small_patch16_384
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 vit_small_patch16_384_seed42 fold=3 n=1598 wrong_mixed=247 wrong_single=247 flips=0
+CONF s3 vit_small_patch16_384_seed42 fold=3 which=mixed m=1003,58,13,0,1,4,0,52,116,5,0,0,1,2,25,29,110,0,0,5,9,8,0,0,9,0,0,0,1,0,0,0,15,0,0,3,2,2,2,0,58,5,6,1,2,1,0,10,40
+CONF s3 vit_small_patch16_384_seed42 fold=3 which=single m=1003,58,13,0,1,4,0,52,116,5,0,0,1,2,25,29,110,0,0,5,9,8,0,0,9,0,0,0,1,0,0,0,15,0,0,3,2,2,2,0,58,5,6,1,2,1,0,10,40
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+[Debug][Loader] label, shuffle=False: samples=1598, batches=100, batch_size=16, num_workers=4, pin_memory=True
+TALLY s3 vit_small_patch16_384_seed42 fold=4 n=1598 wrong_mixed=269 wrong_single=270 flips=2
+CONF s3 vit_small_patch16_384_seed42 fold=4 which=mixed m=943,70,43,1,0,16,3,34,119,17,2,3,1,4,6,13,122,0,0,5,9,1,1,3,15,0,1,2,1,0,0,0,10,0,0,5,0,8,1,0,93,0,1,4,14,0,0,0,27
+CONF s3 vit_small_patch16_384_seed42 fold=4 which=single m=942,71,43,1,0,16,3,34,119,17,2,3,1,4,6,13,122,0,0,5,9,1,1,3,15,0,1,2,1,0,0,0,10,0,0,4,1,8,1,0,93,0,1,4,14,0,0,0,27
+
+Per-fold counts are on the TALLY lines above. Add the two GPUs' logs with
+  python fp32_probe.py --combine <log> <log>

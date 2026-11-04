@@ -1,0 +1,85 @@
+nohup: 입력 무시
+logs -> $HOME/fp32_probe_logs
+gpu 0 takes folds 0,1,2, gpu 1 takes folds 3,4
+
+== s3, other backbones, roots under $PROJECT_ROOT
+   convnext_tiny
+      gpu 0 exit=0  gpu 1 exit=0
+      TALLY lines: 3+2
+   efficientnet_b3
+      gpu 0 exit=0  gpu 1 exit=0
+      TALLY lines: 3+2
+   resnet50
+      gpu 0 exit=0  gpu 1 exit=0
+      TALLY lines: 3+2
+   vit_small_patch16_384
+      gpu 0 exit=0  gpu 1 exit=0
+      TALLY lines: 3+2
+
+== combined over every log in $HOME/fp32_probe_logs
+  read $HOME/fp32_probe_logs/s15.gpu0.log
+  read $HOME/fp32_probe_logs/s15.gpu1.log
+  read $HOME/fp32_probe_logs/s3.gpu0.log
+  read $HOME/fp32_probe_logs/s3.gpu1.log
+  read $HOME/fp32_probe_logs/s3_convnext_tiny.gpu0.log
+  read $HOME/fp32_probe_logs/s3_convnext_tiny.gpu1.log
+  read $HOME/fp32_probe_logs/s3_efficientnet_b3.gpu0.log
+  read $HOME/fp32_probe_logs/s3_efficientnet_b3.gpu1.log
+  read $HOME/fp32_probe_logs/s3_resnet50.gpu0.log
+  read $HOME/fp32_probe_logs/s3_resnet50.gpu1.log
+  read $HOME/fp32_probe_logs/s3_vit_small_patch16_384.gpu0.log
+  read $HOME/fp32_probe_logs/s3_vit_small_patch16_384.gpu1.log
+  read $HOME/fp32_probe_logs/s4.gpu0.log
+  read $HOME/fp32_probe_logs/s4.gpu1.log
+
+  s15 base  pooled                         mixed=0.860843  single=0.860343  d=-0.000501  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8608 +- 0.0089   single=0.8603 +- 0.0094
+  s15 mask_m0  pooled                      mixed=0.860343  single=0.860593  d=+0.000250  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8603 +- 0.0111   single=0.8606 +- 0.0109
+  s15 mask_m120  pooled                    mixed=0.863221  single=0.863221  d=+0.000000  same at 4 dp
+                                           the table prints the fold mean: mixed=0.8632 +- 0.0078   single=0.8632 +- 0.0078
+  s15 mask_m20  pooled                     mixed=0.863972  single=0.864097  d=+0.000125  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8640 +- 0.0112   single=0.8641 +- 0.0111
+  s15 mask_m40  pooled                     mixed=0.863346  single=0.863096  d=-0.000250  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8633 +- 0.0101   single=0.8631 +- 0.0101
+  s15 mask_m60  pooled                     mixed=0.863972  single=0.863847  d=-0.000125  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8640 +- 0.0117   single=0.8638 +- 0.0115
+  s15 mask_m80  pooled                     mixed=0.863096  single=0.862721  d=-0.000375  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8631 +- 0.0088   single=0.8627 +- 0.0085
+  s3 convnext_tiny_seed42  pooled          mixed=0.857715  single=0.857715  d=+0.000000  same at 4 dp
+                                           the table prints the fold mean: mixed=0.8577 +- 0.0069   single=0.8577 +- 0.0068
+                                           predictions that differ: 2 of 7991
+  s3 convnext_tiny_seed42  macro F1        mixed=0.762419  single=0.762399  d=-0.000021  same at 4 dp
+  s3 efficientnet_b3_seed42  pooled        mixed=0.812915  single=0.813040  d=+0.000125  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8129 +- 0.0243   single=0.8130 +- 0.0242
+                                           predictions that differ: 12 of 7991
+  s3 efficientnet_b3_seed42  macro F1      mixed=0.693992  single=0.693281  d=-0.000711  MOVES at 4 dp
+  s3 mambaout_tiny.in1k_seed42  pooled     mixed=0.860843  single=0.860343  d=-0.000501  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8608 +- 0.0089   single=0.8603 +- 0.0094
+                                           predictions that differ: 4 of 7991
+  s3 mambaout_tiny.in1k_seed42  macro F1   mixed=0.761756  single=0.761208  d=-0.000549  MOVES at 4 dp
+  s3 mambaout_tiny.in1k_seed43  pooled     mixed=0.854461  single=0.854336  d=-0.000125  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8545 +- 0.0089   single=0.8543 +- 0.0093
+                                           predictions that differ: 5 of 7991
+  s3 mambaout_tiny.in1k_seed43  macro F1   mixed=0.767915  single=0.767634  d=-0.000281  MOVES at 4 dp
+  s3 mambaout_tiny.in1k_seed44  pooled     mixed=0.858591  single=0.858591  d=+0.000000  same at 4 dp
+                                           the table prints the fold mean: mixed=0.8586 +- 0.0099   single=0.8586 +- 0.0100
+                                           predictions that differ: 2 of 7991
+  s3 mambaout_tiny.in1k_seed44  macro F1   mixed=0.762887  single=0.762949  d=+0.000063  same at 4 dp
+  s3 resnet50_seed42  pooled               mixed=0.797898  single=0.797647  d=-0.000250  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.7979 +- 0.0101   single=0.7976 +- 0.0101
+                                           predictions that differ: 8 of 7991
+  s3 resnet50_seed42  macro F1             mixed=0.650459  single=0.650108  d=-0.000351  MOVES at 4 dp
+  s3 vit_small_patch16_384_seed42  pooled  mixed=0.836816  single=0.836691  d=-0.000125  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8368 +- 0.0075   single=0.8367 +- 0.0076
+                                           predictions that differ: 2 of 7991
+  s3 vit_small_patch16_384_seed42  macro F1 mixed=0.752569  single=0.752482  d=-0.000087  MOVES at 4 dp
+  s4 bgdim  pooled                         mixed=0.820048  single=0.820048  d=+0.000000  same at 4 dp
+                                           the table prints the fold mean: mixed=0.8200 +- 0.0135   single=0.8200 +- 0.0135
+                                           predictions that differ: 3 of 7991
+  s4 lcrop  pooled                         mixed=0.807158  single=0.807283  d=+0.000125  MOVES at 4 dp
+                                           the table prints the fold mean: mixed=0.8072 +- 0.0241   single=0.8073 +- 0.0234
+                                           predictions that differ: 5 of 7991
+
+A row marked 'same at 4 dp' needs no edit. A row that moves needs its table
+cell, and every sentence derived from it, recomputed.
