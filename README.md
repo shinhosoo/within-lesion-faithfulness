@@ -37,6 +37,7 @@ numbers that have since changed. Neither those experiments nor their checkers ar
 | Supplementary Tables S13 and S14 | the recorded fold values, plus archives for two rows of S14's upper block | images and the frozen classifier, for the remaining rows |
 | Supplementary Table S18 | the sixty per-fold archives, their reading as JSON, and their hashes | Python; PyTorch only to re-read the archives with the measurement script |
 | Supplementary Tables S2, S3, S4 and S15 | the per-fold counts of the single-precision re-measurement | Python |
+| Supplementary Table S7 | the script, which rebuilds the reference from the grid | Python, NumPy, Pillow, and the masks |
 | Figures 2 and 3 | the plotting scripts | the matching `main.tex` and `supplementary.tex`, and Matplotlib |
 | Figure 4 | the qualitative plotting script | images, masks, the frozen classifier, two head checkpoints |
 | Training and evaluation from scratch | the source and the fixed folds | images, masks, the model dependencies, a GPU |
@@ -56,7 +57,10 @@ python code/verify_heads.py dump dumps/nested.json   --root archives/outputs_nes
 
 The three dumps correspond to `results/package_main.json`, `results/package_convnext_tiny.json`
 and `results/package_nested.json`, the output of the same commands against this repository.
-Absolute output paths differ by machine and need not match. The `table` mode prints the same
+Absolute output paths differ by machine and need not match. The main dump carries 24 further
+values, a comparison across the three readout seeds, which need the seed-43 and seed-44 roots as
+well; one `--root` does not reach them, so the command above reproduces 463 of its 487 values,
+and all 463 agree. The `table` mode prints the same
 values with the diagnostics:
 
 ```bash

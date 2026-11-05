@@ -84,6 +84,9 @@ Paths are relative to `code/`.
 | the published reading of that table, from the probe log | `zoom_from_tally.py` |
 | each reported accuracy computed under both precisions | `fp32_probe.py` |
 | the check of Supplementary Table S18 against its values file | `check_s18_json.py` |
+| the centred-Gaussian reference at seven widths | `improve/sigma_sweep.py` |
+| the check of Supplementary Table S7 against its values file | `check_s7_json.py` |
+| the single-precision tables against the probe log | `check_logs_vs_tables.py` |
 | the label-efficiency runs | `improve/sup_frac*.py` |
 | the second backbone | `improve/bb_run.py` |
 | heads trained on occlusion and gradient targets | `improve/distil.py`, `improve/grad_distil.py` |
@@ -122,6 +125,14 @@ alternatives, at mean Spearman correlations of 0.890, 0.881 and 0.900 and in fiv
 for each. The whole-image ordering held against the narrower blur (0.890, five of five) and
 against neither of the other two (0.510 and 0.505, no fold). The run covers the reference maps
 and not the trained heads.
+
+Its per-fold archives are not in this repository, and Supplementary Table S16 is the one table
+here that needs the run itself: the images, the masks, the frozen classifier and a GPU, for
+eight maps under four baselines over 400 images in each of five folds. Two parts of it can be
+checked without that. Its first column is the published protocol and by construction repeats
+Supplementary Table S10's faithfulness figures, which are reproducible from the archives here,
+and its centred Gaussian row is measured again in Supplementary Table S18, whose archives are
+shipped.
 
 ```bash
 for F in 0 1 2 3 4; do
@@ -163,6 +174,27 @@ python code/improve/perturb_heads.py --collect ~/s16_heads
 python code/improve/perturb_heads.py --latex   ~/s16_heads   # the table body
 python code/improve/perturb_heads.py --json    ~/s16_heads results/perturb_heads.json
 ```
+
+`improve/sigma_sweep.py` is the companion for Supplementary Table S7, which asks how much of
+the centred Gaussian's advantage over the trained maps comes from the width it is built at. The
+map is a function of the grid alone, so the script needs no classifier, no checkpoint and no
+GPU, only the fixed splits and the masks, and it scores with `improve.localize.metrics`
+unchanged. It refuses to start unless its own builder reproduces `improve.localize.center_map()`
+exactly at the published width. That check is not a formality: a second centred Gaussian in this
+code base puts the centre half a pixel away, and using it would move the energy ratio while
+leaving the pointing score and the area-matched IoU untouched, which is the pattern the table
+reports and so would not look wrong. It stops as well if the published width does not reproduce
+the row the table prints for it.
+
+```bash
+python -m improve.sigma_sweep --out ~/sigma_sweep.json
+python code/check_s7_json.py results/sigma_sweep.json "$HAM_PAPER_SRC/supplementary.tex"
+```
+
+`--out` refuses a path inside the project, the splits or the data, so the values are written
+outside and copied in. `check_s7_json.py` compares every printed cell with that file and also
+tests the two claims the caption rests on, that the pointing score and the area-matched IoU do
+not move with the width and that the energy ratio does.
 
 `collect_zoom.py` is the companion for Supplementary Table S15, which reports what the same
 frozen classifier scores when the lesion's bounding box is re-input at inference with a margin
@@ -256,7 +288,8 @@ similarly named plain stem is not a substitute for either.
 | `onestage_7class_macro_95ci.csv` | the classifier's bootstrap interval |
 | `side_analyses.json` | every value of Supplementary Tables S13 and S14, per fold |
 | `fold_level.json` | the per-fold values behind the tests, fold counts and correlations in the text |
-| `zoom_inference.json`, `perturb_variants.json` | Supplementary Tables S15 and S16, S15 in both precisions |
+| `zoom_inference.json` | Supplementary Table S15, in both precisions |
+| `sigma_sweep.json` | Supplementary Table S7, the reference at each of seven widths |
 | `perturb_heads.json` | Supplementary Table S18, per fold, with each archive's hash |
 | `source_hashes.json` | hashes of the files in `code/` as shipped, and what changed |
 

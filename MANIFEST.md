@@ -166,7 +166,8 @@ outputs, and its counts exist only in these logs.
 | `s4.gpu*.log` | `TALLY` lines for the lesion-crop and dimmed-background conditions | the error counts behind those accuracies |
 
 `code/zoom_from_tally.py` does the Supplementary Table S15 derivation, and with `--supp` checks it
-against the manuscript. The logs carry no image identifiers, so they support the counts and the
+against the manuscript. `code/check_logs_vs_tables.py` checks Supplementary Tables S2, S3 and S4
+against the same logs, each against the part of them that records it. The logs carry no image identifiers, so they support the counts and the
 accuracies and not any per-image grouping.
 
 The shipped copies were passed through `code/scrub_logs.py`, which collapses each progress bar to
